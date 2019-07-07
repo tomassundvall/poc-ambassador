@@ -3,6 +3,10 @@ Prof Of Concept of how to deploy and use the Ambassador API Gateway
 
 ## Install Gateway
 ```
+Set permissions:
+sudo chmod 777 setup.sh
+sudo chmod 777 teardown.sh
+
 kubectl create namespace qa1
 
 helm install stable/ambassador \
@@ -19,13 +23,14 @@ helm install Tour
 Access admin GUI:
 http://localhost/ambassador/v0/diag/
 
-Ambassador tour example app:
-kubectl apply -f https://getambassador.io/yaml/tour/tour.yaml
+Access tour app:
+http://localhost/tour
 ```
 
 ## Cleanup
 ```
 helm delete --purge gateway
+helm delete --purge tour
 kubectl get crd | grep 'getambassador.io'| awk '{print $1}' | xargs kubectl delete crd
 kubectl delete namespace qa1
 ```
